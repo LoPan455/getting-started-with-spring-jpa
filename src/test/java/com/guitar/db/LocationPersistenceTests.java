@@ -1,7 +1,10 @@
 package com.guitar.db;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
+
+import com.guitar.db.repository.LocationJpaRepository;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -23,8 +26,17 @@ public class LocationPersistenceTests {
 	@Autowired
 	private LocationRepository locationRepository;
 
+	@Autowired
+	LocationJpaRepository locationJpaRepository;
+
 	@PersistenceContext
 	private EntityManager entityManager;
+
+	@Test
+	public void testJpaFind() {
+		List<Location> locations = locationJpaRepository.findAll();
+		assertNotNull(locations);
+	}
 
 	@Test
 	@Transactional
